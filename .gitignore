@@ -130,3 +130,6 @@ dmypy.json
 
 # IDE
 .vscode/
+
+# Test artifacts
+test/output.csv
