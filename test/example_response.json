@@ -1,0 +1,108 @@
+{
+    "object": "card",
+    "id": "73a44759-1fa4-4a96-b668-316851e8a35a",
+    "oracle_id": "eccc9a54-2b56-4a02-9926-258d5b2e25fb",
+    "multiverse_ids": [
+        495996
+    ],
+    "tcgplayer_id": 222653,
+    "cardmarket_id": 504265,
+    "name": "Abundance",
+    "lang": "en",
+    "released_at": "2020-09-25",
+    "uri": "https://api.scryfall.com/cards/73a44759-1fa4-4a96-b668-316851e8a35a",
+    "scryfall_uri": "https://scryfall.com/card/znc/58/abundance?utm_source=api",
+    "layout": "normal",
+    "highres_image": true,
+    "image_status": "highres_scan",
+    "image_uris": {
+        "small": "https://c1.scryfall.com/file/scryfall-cards/small/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.jpg?1604193670",
+        "normal": "https://c1.scryfall.com/file/scryfall-cards/normal/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.jpg?1604193670",
+        "large": "https://c1.scryfall.com/file/scryfall-cards/large/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.jpg?1604193670",
+        "png": "https://c1.scryfall.com/file/scryfall-cards/png/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.png?1604193670",
+        "art_crop": "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.jpg?1604193670",
+        "border_crop": "https://c1.scryfall.com/file/scryfall-cards/border_crop/front/7/3/73a44759-1fa4-4a96-b668-316851e8a35a.jpg?1604193670"
+    },
+    "mana_cost": "{2}{G}{G}",
+    "cmc": 4.0,
+    "type_line": "Enchantment",
+    "oracle_text": "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.",
+    "colors": [
+        "G"
+    ],
+    "color_identity": [
+        "G"
+    ],
+    "keywords": [],
+    "legalities": {
+        "standard": "not_legal",
+        "future": "not_legal",
+        "historic": "not_legal",
+        "gladiator": "not_legal",
+        "pioneer": "not_legal",
+        "modern": "legal",
+        "legacy": "legal",
+        "pauper": "not_legal",
+        "vintage": "legal",
+        "penny": "not_legal",
+        "commander": "legal",
+        "brawl": "not_legal",
+        "duel": "legal",
+        "oldschool": "not_legal",
+        "premodern": "legal"
+    },
+    "games": [
+        "paper"
+    ],
+    "reserved": false,
+    "foil": true,
+    "nonfoil": true,
+    "oversized": false,
+    "promo": false,
+    "reprint": true,
+    "variation": false,
+    "set_id": "25c6bd9b-4e10-40a4-b9b5-0f4d9b5852a1",
+    "set": "znc",
+    "set_name": "Zendikar Rising Commander",
+    "set_type": "commander",
+    "set_uri": "https://api.scryfall.com/sets/25c6bd9b-4e10-40a4-b9b5-0f4d9b5852a1",
+    "set_search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Aznc&unique=prints",
+    "scryfall_set_uri": "https://scryfall.com/sets/znc?utm_source=api",
+    "rulings_uri": "https://api.scryfall.com/cards/73a44759-1fa4-4a96-b668-316851e8a35a/rulings",
+    "prints_search_uri": "https://api.scryfall.com/cards/search?order=released&q=oracleid%3Aeccc9a54-2b56-4a02-9926-258d5b2e25fb&unique=prints",
+    "collector_number": "58",
+    "digital": false,
+    "rarity": "rare",
+    "card_back_id": "0aeebaf5-8c7d-4636-9e82-8c27447861f7",
+    "artist": "Rebecca Guay",
+    "artist_ids": [
+        "f8f662fa-d597-46a3-afb2-91d6e13243e2"
+    ],
+    "illustration_id": "4be12219-df08-4a40-b32f-69737db62615",
+    "border_color": "black",
+    "frame": "2015",
+    "full_art": false,
+    "textless": false,
+    "booster": false,
+    "story_spotlight": false,
+    "edhrec_rank": 1139,
+    "prices": {
+        "usd": "0.24",
+        "usd_foil": null,
+        "eur": "0.20",
+        "eur_foil": null,
+        "tix": null
+    },
+    "related_uris": {
+        "gatherer": "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=495996",
+        "tcgplayer_infinite_articles": "https://infinite.tcgplayer.com/search?contentMode=article&game=magic&partner=scryfall&q=Abundance&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+        "tcgplayer_infinite_decks": "https://infinite.tcgplayer.com/search?contentMode=deck&game=magic&partner=scryfall&q=Abundance&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+        "edhrec": "https://edhrec.com/route/?cc=Abundance",
+        "mtgtop8": "https://mtgtop8.com/search?MD_check=1&SB_check=1&cards=Abundance"
+    },
+    "purchase_uris": {
+        "tcgplayer": "https://shop.tcgplayer.com/product/productsearch?id=222653&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+        "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Search?referrer=scryfall&searchString=Abundance&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
+        "cardhoarder": "https://www.cardhoarder.com/cards?affiliate_id=scryfall&data%5Bsearch%5D=Abundance&ref=card-profile&utm_campaign=affiliate&utm_medium=card&utm_source=scryfall"
+    }
+}
