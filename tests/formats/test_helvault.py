@@ -29,9 +29,7 @@ def sample_row() -> dict[str, str]:
 
 
 class TestHelvaultHandler:
-    def test_parse_row_basic(
-        self, handler: HelvaultHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_parse_row_basic(self, handler: HelvaultHandler, sample_row: dict[str, str]) -> None:
         entry = handler.parse_row(sample_row)
 
         assert entry.card.name == "Goblin Arsonist"
@@ -44,16 +42,12 @@ class TestHelvaultHandler:
         assert entry.finish == Finish.FOIL
         assert entry.language == Language.ENGLISH
 
-    def test_parse_row_nonfoil(
-        self, handler: HelvaultHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_parse_row_nonfoil(self, handler: HelvaultHandler, sample_row: dict[str, str]) -> None:
         sample_row["extras"] = ""
         entry = handler.parse_row(sample_row)
         assert entry.finish == Finish.NONFOIL
 
-    def test_format_row(
-        self, handler: HelvaultHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_format_row(self, handler: HelvaultHandler, sample_row: dict[str, str]) -> None:
         entry = handler.parse_row(sample_row)
         formatted = handler.format_row(entry)
 
@@ -62,9 +56,7 @@ class TestHelvaultHandler:
         assert formatted["extras"] == "foil"
         assert formatted["set_code"] == "m12"
 
-    def test_round_trip(
-        self, handler: HelvaultHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_round_trip(self, handler: HelvaultHandler, sample_row: dict[str, str]) -> None:
         """Parsing then formatting should preserve data."""
         entry = handler.parse_row(sample_row)
         formatted = handler.format_row(entry)

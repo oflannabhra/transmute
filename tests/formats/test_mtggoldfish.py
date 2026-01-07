@@ -26,9 +26,7 @@ def sample_row() -> dict[str, str]:
 
 
 class TestMTGGoldfishHandler:
-    def test_parse_row_basic(
-        self, handler: MTGGoldfishHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_parse_row_basic(self, handler: MTGGoldfishHandler, sample_row: dict[str, str]) -> None:
         entry = handler.parse_row(sample_row)
 
         assert entry.card.name == "Goblin Arsonist"
@@ -51,9 +49,7 @@ class TestMTGGoldfishHandler:
         entry = handler.parse_row(sample_row)
         assert entry.finish == Finish.ETCHED
 
-    def test_format_row_foil(
-        self, handler: MTGGoldfishHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_format_row_foil(self, handler: MTGGoldfishHandler, sample_row: dict[str, str]) -> None:
         entry = handler.parse_row(sample_row)
         formatted = handler.format_row(entry)
 
@@ -69,9 +65,7 @@ class TestMTGGoldfishHandler:
         formatted = handler.format_row(entry)
         assert formatted["Foil"] == "REGULAR"
 
-    def test_round_trip(
-        self, handler: MTGGoldfishHandler, sample_row: dict[str, str]
-    ) -> None:
+    def test_round_trip(self, handler: MTGGoldfishHandler, sample_row: dict[str, str]) -> None:
         """Parsing then formatting should preserve data."""
         entry = handler.parse_row(sample_row)
         formatted = handler.format_row(entry)
@@ -81,9 +75,7 @@ class TestMTGGoldfishHandler:
         assert entry.quantity == entry2.quantity
         assert entry.finish == entry2.finish
 
-    def test_read_file(
-        self, handler: MTGGoldfishHandler, mtggoldfish_csv: Path
-    ) -> None:
+    def test_read_file(self, handler: MTGGoldfishHandler, mtggoldfish_csv: Path) -> None:
         """Handler should read the sample file."""
         collection = handler.read(mtggoldfish_csv)
 
@@ -93,9 +85,7 @@ class TestMTGGoldfishHandler:
         assert entry.quantity == 4
         assert entry.finish == Finish.FOIL
 
-    def test_detect_format(
-        self, handler: MTGGoldfishHandler, mtggoldfish_csv: Path
-    ) -> None:
+    def test_detect_format(self, handler: MTGGoldfishHandler, mtggoldfish_csv: Path) -> None:
         """Handler should detect its own format."""
         assert handler.detect(mtggoldfish_csv) is True
 
