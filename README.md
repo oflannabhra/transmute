@@ -94,3 +94,4 @@ amount,card_name,is_foil,is_pinned,set_id,set_code
 Quantity,Name,Code,PurchasePrice,Foil,Condition,Language,PurchaseDate
 1,"Amulet of Vigor",WWK,18.04,0,0,0,5/6/2018
 1,"Arcane Lighthouse",C14,3.83,0,0,0,5/6/2018
+```
