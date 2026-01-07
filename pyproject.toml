@@ -1,0 +1,58 @@
+[project]
+name = "transmute-mtg"
+version = "0.1.0"
+description = "CLI tool for converting MTG collection CSV files between formats"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Ben Flannery", email = "oflannabhra@gmail.com" }
+]
+requires-python = ">=3.12"
+keywords = ["mtg", "magic", "collection", "csv", "converter"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Games/Entertainment",
+]
+dependencies = [
+    "click>=8.0",
+    "requests>=2.28",
+    "rich>=13.0",
+]
+
+[project.scripts]
+transmute = "transmute.cli:cli"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "responses>=0.23",
+    "mypy>=1.0",
+    "ruff>=0.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/transmute"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=transmute --cov-report=term-missing"
