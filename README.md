@@ -1,97 +1,228 @@
 # Transmute
-CLI tool for converting CSV-based Magic: the Gathering (MtG) collection files
 
-## CSV Formats
+[![PyPI version](https://badge.fury.io/py/transmute-mtg.svg)](https://badge.fury.io/py/transmute-mtg)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-#### Helvault
+CLI tool for converting Magic: The Gathering collection CSV files between formats.
+
+## Features
+
+- Convert collections between 16 different formats
+- Auto-detect input format from CSV headers
+- Optional Scryfall API integration to fill missing card data
+- Simple command-line interface
+
+## Installation
+
+```bash
+pip install transmute-mtg
+```
+
+Or with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install transmute-mtg
+```
+
+## Usage
+
+### Convert between formats
+
+```bash
+# Basic conversion (auto-detect input format)
+transmute convert my-collection.csv output.csv -o manabox
+
+# Specify both input and output formats
+transmute convert goldfish-export.csv moxfield-import.csv -i mtggoldfish -o moxfield
+
+# Fill missing card data via Scryfall API
+transmute convert collection.csv output.csv -o helvault --scryfall
+```
+
+### List supported formats
+
+```bash
+transmute formats
+```
+
+### Auto-detect a file's format
+
+```bash
+transmute detect mystery-file.csv
+```
+
+## Supported Formats
+
+| Format | CLI Name | Notes |
+|--------|----------|-------|
+| Archidekt | `archidekt` | Flexible columns, Scryfall ID support |
+| Card Kingdom | `cardkingdom` | Simple 4-column format for selling |
+| Cardsphere | `cardsphere` | Trading platform with Scryfall ID |
+| Deckbox | `deckbox` | Uses full set names |
+| Decked Builder | `deckbuilder` | Separate regular/foil quantities |
+| Deckstats | `deckstats` | 0/1 for foil status |
+| DragonShield | `dragonshield` | Card scanner app with folder support |
+| Helvault | `helvault` | Requires Scryfall IDs |
+| ManaBox | `manabox` | Popular mobile app |
+| Moxfield | `moxfield` | Popular deck builder |
+| MTGGoldfish | `mtggoldfish` | Supports FOIL/REGULAR/FOIL_ETCHED |
+| MTG Manager | `mtgmanager` | Numeric codes for condition |
+| MTGO | `mtgo` | Magic Online format |
+| MTGStocks | `mtgstocks` | Price tracking site |
+| MTG Studio | `mtgstudio` | Simple Yes/No foil format |
+| TCGPlayer | `tcgplayer` | Includes Product ID/SKU |
+
+## Python API
+
+You can also use transmute as a library:
+
+```python
+from pathlib import Path
+from transmute.converter import Converter
+from transmute.formats import FormatRegistry
+
+# Convert a file
+converter = Converter(use_scryfall=True)
+converter.convert(
+    input_path=Path("collection.csv"),
+    output_path=Path("output.csv"),
+    input_format="mtggoldfish",
+    output_format="manabox",
+)
+
+# Read a collection
+handler = FormatRegistry.get("helvault")
+collection = handler.read(Path("helvault-export.csv"))
+
+for entry in collection:
+    print(f"{entry.quantity}x {entry.card.name} ({entry.card.set_code})")
+```
+
+## CSV Format Examples
+
+<details>
+<summary>Helvault</summary>
+
 ```csv
 collector_number,extras,language,name,oracle_id,quantity,scryfall_id,set_code,set_name
-"136","foil","en","Goblin Arsonist","c1177f22-a1cf-4da3-a68d-ff954e878403","4","c24751fd-5e9b-4d7d-83ba-e306b439bbe1","m12","Magic 2012"
+"136","foil","en","Goblin Arsonist","c1177f22-...","4","c24751fd-...","m12","Magic 2012"
 ```
+</details>
 
-#### Scryfall
-```csv
-```
+<details>
+<summary>MTGGoldfish</summary>
 
-#### MTGO
-```csv
-Card Name,Quantity,ID #,Rarity,Set,Collector #,Premium,
-"Banisher Priest",1,51909,Uncommon,PRM,1136/1158,Yes'
-"Batterskull",10,51909,Uncommon,PRM,1136/1158,Yes'
-Notes: ID #, Rarity, Collector # are optional (leave the column empty). Set is the 3-letter set code, Premium is "Yes" for foils or "No" otherwise.
-```
-
-#### MTG Studio
-```csv
-Name,Edition,Qty,Foil
-Aether Vial,MMA,1,No
-Anax and Cymede,THS,4,Yes
-Notes: Edition is the 3-letter set code, Foil should be "Yes" or "No"
-```
-
-#### Deckbox
-```csv
-Count,Tradelist Count,Name,Edition,Card Number,Condition,Language,Foil,Signed,Artist Proof,Altered Art,Mis,
-4,4,Angel of Serenity,Return to Ravnica,1,Near Mint,English,,,,,,,,
-1,1,Ashen Rider,Theros,187,Near Mint,English,,,,,,,,
-1,0,Anax and Cymede,Theros,186,Near Mint,English,foil,,,,,,,
-Notes: Foil should be "foil" for foils. Edition is the name of the set.
-```
-
-#### Deck Builder
-```csv
-Total Qty,Reg Qty,Foil Qty,Card,Set,Mana Cost,Card Type,Color,Rarity,Mvid,Single Price,Single Foil Price,Total Price,Price Source,Notes
-3,2,1,Black Sun's Zenith,Mirrodin Besieged,XBB,Sorcery,Black,Rare,214061,1.00,6.25,7.25,cardshark,
-1,1,0,Snapcaster Mage,Innistrad,1U,Creature  - Human Wizard,Blue,Rare,227676,26.60,115.00,141.60,cardshark,
-Notes: Foils are indicated in the Foil Qty column.
-```
-
-#### Pucatrade
-```csv
-Count,Name,Edition,Rarity,Expansion Symbol,Points,Foil,Condition,Language,Status,Entered Date,Updated Date,Exported Date
-1,Breeding Pool,Gatecrash,RARE,GTC,1009,0,"Near Mint","English",NOT FOR TRADE,"11/19/2014","11/29/2014","11/30/2014",19632
-8,Rattleclaw Mystic,Khans of Tarkir,RARE,KTK,194,0,"Near Mint","English",HAVE,"11/29/2014","11/29/2014","11/30/2014",25942
-1,Opulent Palace,Khans of Tarkir,UNCOMMON,KTK,461,1,"Near Mint","English",HAVE,"11/29/2014","11/29/2014","11/30/2014",25928
-1,Tasigur the Golden Fang,Fate Reforged,RARE,FRF,1045,1,"Near Mint","English",HAVE,"1/24/2015","1/24/2015","2/03/2015",270
-1,Tasigur the Golden Fang,Fate Reforged,RARE,FRF,1045,1,"Near Mint","English",HAVE,"1/24/2015","1/24/2015","2/03/2015",270
-Notes: Foil should be 1 for foils (0 otherwise).
-```
-
-#### MTGGoldfish
 ```csv
 Card,Set ID,Set Name,Quantity,Foil,Variation
-Aether Vial,MMA,Modern Masters,1,""
+Aether Vial,MMA,Modern Masters,1,REGULAR,""
 Anax and Cymede,THS,Theros,4,FOIL,""
-Notes: Foil should be FOIL for foil cards, REGULAR for regular cards, FOIL_ETCHED for foil-etched cards.
 ```
+Foil values: `FOIL`, `REGULAR`, `FOIL_ETCHED`
+</details>
 
-#### MTGStocks
+<details>
+<summary>ManaBox</summary>
+
 ```csv
-"Card","Set","Quantity","Price","Condition","Language","Foil","Signed"
-"Abandon Hope","Tempest",2,0.24,M,en,No,No
-"Abduction","Classic Sixth Edition",1,0.33,M,en,No,No
-"Advent of the Wurm","Modern Masters 2017",1,0.99,M,en,Yes,No
-"Advent of the Wurm","Modern Masters 2017",3,0.35,M,en,No,No
+Name,Set code,Set name,Collector number,Foil,Rarity,Quantity,Scryfall ID,Condition,Language
+Lightning Bolt,m10,Magic 2010,146,foil,Common,4,abc123...,NM,en
 ```
+</details>
 
-#### TCGPlayer
+<details>
+<summary>Moxfield</summary>
+
+```csv
+Count,Tradelist Count,Name,Edition,Condition,Language,Foil,Alter,Proxy,Purchase Price
+4,2,Lightning Bolt,m10,NM,English,foil,,,
+```
+</details>
+
+<details>
+<summary>DragonShield</summary>
+
+```csv
+Folder Name,Quantity,Trade Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language
+Binder,4,0,Lightning Bolt,M10,Magic 2010,146,NearMint,Foil,English
+```
+</details>
+
+<details>
+<summary>TCGPlayer</summary>
+
 ```csv
 Quantity,Name,Simple Name,Set,Card Number,Set Code,Printing,Condition,Language,Rarity,Product ID,SKU
 1,Verdant Catacombs,Verdant Catacombs,Zendikar,229,ZEN,Normal,Near Mint,English,Rare,33470,315319
-1,Graven Cairns,Graven Cairns,Zendikar Expeditions,28,EXP,Foil,Near Mint,English,Mythic,110729,3042202
-1,Olivia Voldaren,Olivia Voldaren,Innistrad,215,ISD,Foil,Near Mint,English,Mythic,52181,500457
 ```
+</details>
 
-#### Deckstats
+<details>
+<summary>Deckbox</summary>
+
+```csv
+Count,Tradelist Count,Name,Edition,Card Number,Condition,Language,Foil,Signed
+4,4,Angel of Serenity,Return to Ravnica,1,Near Mint,English,,,
+```
+Edition is the **full set name** (not code). Foil is `foil` or empty.
+</details>
+
+<details>
+<summary>MTGO</summary>
+
+```csv
+Card Name,Quantity,ID #,Rarity,Set,Collector #,Premium
+Banisher Priest,1,51909,Uncommon,PRM,1136/1158,Yes
+```
+Premium is `Yes` for foils, `No` otherwise.
+</details>
+
+<details>
+<summary>MTGStocks</summary>
+
+```csv
+"Card","Set","Quantity","Price","Condition","Language","Foil","Signed"
+"Advent of the Wurm","Modern Masters 2017",1,0.99,M,en,Yes,No
+```
+</details>
+
+<details>
+<summary>Deckstats</summary>
+
 ```csv
 amount,card_name,is_foil,is_pinned,set_id,set_code
 1,"Abandon Reason",0,0,147,"EMN"
-2,"Abandoned Sarcophagus",0,0,187,"HOU"
 ```
+</details>
 
-#### MTGManager
+<details>
+<summary>MTG Manager</summary>
+
 ```csv
 Quantity,Name,Code,PurchasePrice,Foil,Condition,Language,PurchaseDate
 1,"Amulet of Vigor",WWK,18.04,0,0,0,5/6/2018
-1,"Arcane Lighthouse",C14,3.83,0,0,0,5/6/2018
 ```
+Condition and Language use numeric codes.
+</details>
+
+## Development
+
+```bash
+# Clone and install
+git clone https://github.com/oflannabhra/transmute.git
+cd transmute
+uv sync
+
+# Run tests
+uv run pytest
+
+# Lint
+uv run ruff check src/ tests/
+
+# Format
+uv run ruff format src/ tests/
+```
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
