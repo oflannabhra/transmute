@@ -26,9 +26,7 @@ class ScryfallClient:
         self.config = config or ScryfallConfig()
         self._last_request_time: float = 0
         self._session = requests.Session()
-        self._session.headers.update(
-            {"User-Agent": "Transmute-MTG-Collection-Converter/1.0"}
-        )
+        self._session.headers.update({"User-Agent": "Transmute-MTG-Collection-Converter/1.0"})
 
     def _rate_limit(self) -> None:
         """Ensure we respect Scryfall's rate limit."""

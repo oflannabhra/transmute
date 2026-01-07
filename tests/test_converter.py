@@ -9,9 +9,7 @@ from transmute.core.enums import Finish
 
 
 class TestConverter:
-    def test_convert_helvault_to_mtggoldfish(
-        self, helvault_csv: Path, tmp_path: Path
-    ) -> None:
+    def test_convert_helvault_to_mtggoldfish(self, helvault_csv: Path, tmp_path: Path) -> None:
         """Convert Helvault format to MTGGoldfish format."""
         output_file = tmp_path / "output.csv"
 
@@ -37,9 +35,7 @@ class TestConverter:
         assert entry.quantity == 4
         assert entry.finish == Finish.FOIL
 
-    def test_convert_mtggoldfish_to_helvault(
-        self, mtggoldfish_csv: Path, tmp_path: Path
-    ) -> None:
+    def test_convert_mtggoldfish_to_helvault(self, mtggoldfish_csv: Path, tmp_path: Path) -> None:
         """Convert MTGGoldfish format to Helvault format."""
         output_file = tmp_path / "output.csv"
 
@@ -65,9 +61,7 @@ class TestConverter:
         assert entry.quantity == 4
         assert entry.finish == Finish.FOIL
 
-    def test_convert_with_autodetect(
-        self, helvault_csv: Path, tmp_path: Path
-    ) -> None:
+    def test_convert_with_autodetect(self, helvault_csv: Path, tmp_path: Path) -> None:
         """Convert with auto-detected input format."""
         output_file = tmp_path / "output.csv"
 
@@ -81,9 +75,7 @@ class TestConverter:
 
         assert output_file.exists()
 
-    def test_convert_requires_output_format(
-        self, helvault_csv: Path, tmp_path: Path
-    ) -> None:
+    def test_convert_requires_output_format(self, helvault_csv: Path, tmp_path: Path) -> None:
         """Convert should raise error without output format."""
         output_file = tmp_path / "output.csv"
 
