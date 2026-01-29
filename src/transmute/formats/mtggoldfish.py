@@ -12,8 +12,8 @@ class MTGGoldfishHandler(FormatHandler):
     Handler for MTGGoldfish CSV format.
 
     MTGGoldfish format:
-    Card,Set ID,Set Name,Quantity,Foil,Variation
-    Goblin Arsonist,m12,Magic 2012,4,True,""
+    Card,Set ID,Set Name,Quantity,Foil,Variation,Collector Number,Scryfall ID
+    Goblin Arsonist,m12,Magic 2012,4,True,"",136,c24751fd-5e9b-4d7d-83ba-e306b439bbe1
 
     Foil values: FOIL, REGULAR, FOIL_ETCHED, True, False
     """
@@ -27,6 +27,8 @@ class MTGGoldfishHandler(FormatHandler):
             name=row["Card"],
             set_code=row.get("Set ID"),
             set_name=row.get("Set Name"),
+            collector_number=row.get("Collector Number"),
+            scryfall_id=row.get("Scryfall ID"),
         )
 
         # Parse foil - handles FOIL, REGULAR, FOIL_ETCHED, True, False
@@ -59,7 +61,12 @@ class MTGGoldfishHandler(FormatHandler):
             "Quantity": str(entry.quantity),
             "Foil": foil_str,
             "Variation": entry.extras.get("variation", ""),
+            "Collector Number": entry.card.collector_number or "",
+            "Scryfall ID": entry.card.scryfall_id or "",
         }
 
     def get_headers(self) -> list[str]:
-        return ["Card", "Set ID", "Set Name", "Quantity", "Foil", "Variation"]
+        return [
+            "Card", "Set ID", "Set Name", "Quantity", "Foil", "Variation",
+            "Collector Number", "Scryfall ID",
+        ]

@@ -13,7 +13,7 @@ class ArchidektHandler(FormatHandler):
 
     Archidekt is very flexible with column mapping. Common export format:
     Quantity,Name,Set Code,Set Name,Collector Number,Condition,Language,
-    Foil,Scryfall ID
+    Foil,Scryfall ID,Oracle ID
 
     They also support importing with just Scryfall ID for exact matching.
     """
@@ -29,6 +29,7 @@ class ArchidektHandler(FormatHandler):
             set_name=row.get("Set Name"),
             collector_number=row.get("Collector Number"),
             scryfall_id=row.get("Scryfall ID"),
+            oracle_id=row.get("Oracle ID"),
         )
 
         # Parse foil
@@ -63,6 +64,7 @@ class ArchidektHandler(FormatHandler):
             "Language": entry.language.value,
             "Foil": foil_str,
             "Scryfall ID": entry.card.scryfall_id or "",
+            "Oracle ID": entry.card.oracle_id or "",
         }
 
     def get_headers(self) -> list[str]:
@@ -76,4 +78,5 @@ class ArchidektHandler(FormatHandler):
             "Language",
             "Foil",
             "Scryfall ID",
+            "Oracle ID",
         ]

@@ -12,7 +12,8 @@ class MoxfieldHandler(FormatHandler):
     Handler for Moxfield CSV format.
 
     Moxfield export format:
-    Count,Tradelist Count,Name,Edition,Condition,Language,Foil,Alter,Proxy,Purchase Price
+    Count,Tradelist Count,Name,Edition,Condition,Language,Foil,Alter,Proxy,
+    Purchase Price,Collector Number
 
     Edition is the set code (lowercase).
     """
@@ -25,6 +26,7 @@ class MoxfieldHandler(FormatHandler):
         card = Card(
             name=row["Name"],
             set_code=row.get("Edition"),
+            collector_number=row.get("Collector Number"),
         )
 
         # Parse foil
@@ -72,6 +74,7 @@ class MoxfieldHandler(FormatHandler):
             "Alter": "true" if entry.is_altered else "",
             "Proxy": entry.extras.get("proxy", ""),
             "Purchase Price": str(entry.purchase_price) if entry.purchase_price else "",
+            "Collector Number": entry.card.collector_number or "",
         }
 
     def get_headers(self) -> list[str]:
@@ -86,4 +89,5 @@ class MoxfieldHandler(FormatHandler):
             "Alter",
             "Proxy",
             "Purchase Price",
+            "Collector Number",
         ]
