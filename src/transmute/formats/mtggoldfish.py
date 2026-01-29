@@ -67,6 +67,12 @@ class MTGGoldfishHandler(FormatHandler):
 
     def get_headers(self) -> list[str]:
         return [
-            "Card", "Set ID", "Set Name", "Quantity", "Foil", "Variation",
-            "Collector Number", "Scryfall ID",
+            "Card",
+            "Set ID",
+            "Set Name",
+            "Quantity",
+            "Foil",
+            "Variation",
+            "Collector Number",
+            "Scryfall ID",
         ]
