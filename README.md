@@ -152,15 +152,16 @@ collector_number,extras,language,name,oracle_id,quantity,scryfall_id,set_code,se
 <summary>MTGGoldfish</summary>
 
 ```csv
-Card,Set ID,Set Name,Quantity,Foil,Variation
-Aether Vial,MMA,Modern Masters,1,REGULAR,""
-Anax and Cymede,THS,Theros,4,FOIL,""
+Card,Set ID,Set Name,Quantity,Foil,Variation,Collector Number,Scryfall ID
+Aether Vial,MMA,Modern Masters,1,REGULAR,"",212,abc123...
+Anax and Cymede,THS,Theros,4,FOIL,"",186,def456...
 ```
 
 **Unique aspects:**
 - Foil is an enum with three values: `FOIL`, `REGULAR`, `FOIL_ETCHED`
 - One of few formats that distinguishes etched foils
 - `Variation` field for special printings (extended art, showcase, etc.)
+- Supports `Collector Number` and `Scryfall ID` for precise card identification
 </details>
 
 <details>
@@ -181,14 +182,15 @@ Lightning Bolt,m10,Magic 2010,146,foil,Common,4,abc123...,NM,en
 <summary>Moxfield</summary>
 
 ```csv
-Count,Tradelist Count,Name,Edition,Condition,Language,Foil,Alter,Proxy,Purchase Price
-4,2,Lightning Bolt,m10,NM,English,foil,,,
+Count,Tradelist Count,Name,Edition,Condition,Language,Foil,Alter,Proxy,Purchase Price,Collector Number
+4,2,Lightning Bolt,m10,NM,English,foil,,,,146
 ```
 
 **Unique aspects:**
 - Separate `Tradelist Count` column for cards available for trade
 - Tracks altered and proxy cards
 - `Edition` uses lowercase set codes
+- Supports `Collector Number` for precise card identification
 </details>
 
 <details>
@@ -293,13 +295,13 @@ Quantity,Name,Code,PurchasePrice,Foil,Condition,Language,PurchaseDate
 <summary>Archidekt</summary>
 
 ```csv
-Quantity,Name,Scryfall ID,Condition,Language,Foil
-4,Lightning Bolt,e3285e6b-...,NM,en,false
+Quantity,Name,Set Code,Set Name,Collector Number,Condition,Language,Foil,Scryfall ID,Oracle ID
+4,Lightning Bolt,m10,Magic 2010,146,NM,en,false,e3285e6b-...,abc123...
 ```
 
 **Unique aspects:**
 - Very flexible column format (minimal required columns)
-- Supports Scryfall ID for precise card identification
+- Supports Scryfall ID and Oracle ID for precise card identification
 - Boolean foil field accepts various formats
 </details>
 
