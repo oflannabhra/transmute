@@ -1,6 +1,6 @@
 [project]
 name = "transmute-mtg"
-version = "0.1.0"
+dynamic = ["version"]
 description = "CLI tool for converting MTG collection CSV files between formats"
 readme = "README.md"
 license = "MIT"
@@ -59,8 +59,11 @@ dev = [
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/transmute"]
