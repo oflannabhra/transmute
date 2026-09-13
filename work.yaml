@@ -1,0 +1,18 @@
+# mtg (transmute-mtg) tasks. Status lives only here. blocked is derived from
+# blocked_by and waiting; never write it as a status.
+tasks:
+  - id: contributing-release-steps
+    title: "CONTRIBUTING.md release process still says to bump the version in pyproject.toml; version is dynamic from tags (hatch-vcs)"
+    status: ready
+    notes: |
+      2026-09-13 found during work-migrate; steps should be: tag vX.Y.Z, push the tag.
+  - id: remote-rename
+    title: "git remote set-url origin git@github.com:oflannabhra/transmute.git (local remote still uses mtg-csv-converter); update flanhub/projects.yaml url to match"
+    status: ready
+    owner: ben
+  - id: format-tests
+    title: "Add per-format round-trip tests for the 12 handlers without their own test file"
+    status: idea
+  - id: gitignore-cleanup
+    title: "Drop the 2021-era test/output.csv gitignore line; delete untracked env/, test/, root transmute/ cruft"
+    status: idea
