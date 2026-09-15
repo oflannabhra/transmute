@@ -64,6 +64,9 @@ history in git. Task ids in parentheses point at `work.yaml`.
 
 ## Secrets
 
+- Secrets layout (flanhub sops-secrets, 2026-09-15): `.sops.yaml` + `.envrc`
+  are in place; a `secrets.enc.yaml` (sops + age) appears with the first
+  local secret and direnv exports it. Recipients: mac + CT 110.
 - None in the repo. PyPI publishing uses OIDC trusted publishing (GitHub
   environment `pypi`); Codecov uses the repo secret `CODECOV_TOKEN`
   (upload failures do not fail CI).

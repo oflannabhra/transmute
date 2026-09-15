@@ -1,0 +1,10 @@
+# SOPS + age (flanhub sops-secrets). secrets.enc.yaml holds this repo's
+# secrets as KEY: value with values encrypted; keys stay readable so a diff
+# shows names, never values. One recipient per machine; private keys never
+# leave their machine. Add or drop a machine here, then
+# `sops updatekeys secrets.enc.yaml`. Loaded by .envrc (direnv).
+creation_rules:
+  - path_regex: secrets\.enc\.yaml$
+    age: >-
+      age1jkd5pz4mu86fk7n9df4y8xlg3zzlx03h3vajfcdrlty6gvknyyvs9p4mag,
+      age1qlyzv3n2dnplp2f48df75mjelc5z8udjznxw92j3pzfvkw7dzg4snengdh
